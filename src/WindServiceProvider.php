@@ -1,18 +1,22 @@
 <?php
 
+namespace Codium\CleanCode;
+
 class WindServiceProvider implements ServiceProviderInterface
 {
-    private $metaweatherprovider;
+    var $metaweatherprovider;
 
     function __construct(MetaWeatherProvider $metaweatherprovider)
+    // function __construct()
     {
-        self::$metaweatherprovider = $metaweatherprovider; 
+        $this->metaweatherprovider = $metaweatherprovider; 
+
     }
 
     public function doPrediction(string $city, \DateTime $datetime)
     {
-        $woeid = $metaweatherprovider->getId($city);
-        $results = $metaweatherprovider-getResults($woeid);
+        $woeid = $this->metaweatherprovider->getId($city);
+        $results = $this->metaweatherprovider->getResults($woeid);
 
         foreach ($results as $result) {
 
@@ -22,4 +26,6 @@ class WindServiceProvider implements ServiceProviderInterface
             }
         }
     }
+
+    function __destruct() {}
 }
